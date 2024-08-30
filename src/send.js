@@ -1,6 +1,7 @@
 const fetch = require("node-fetch");
 const FormData = require('form-data');
-require("dotenv").config({path: '../.env'});
+require("dotenv").config();
+// require("dotenv").config({path: '../.env'});
 
 function sendAlertToAbuseIPDB(someArray) {
     someArray.forEach(item => {

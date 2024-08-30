@@ -1,7 +1,8 @@
 const fetch = require("node-fetch");
 const { dropDuplicates, filterSensitive } = require("./parse");
 const { sendAlertToAbuseIPDB } = require("./send");
-require("dotenv").config({path: '../.env'});
+require("dotenv").config();
+// require("dotenv").config({path: '../.env'});
 
 const now = new Date();
 const threeHoursAgo = new Date(now);

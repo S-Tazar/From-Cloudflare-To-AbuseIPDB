@@ -1,4 +1,5 @@
-require("dotenv").config({path: '../.env'});
+require("dotenv").config();
+// require("dotenv").config({path: '../.env'});
 
 // 替换敏感词
 function filterSensitive(someArray) {
