@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config({path: '../.env'});
 
 // 替换敏感词
 function filterSensitive(someArray) {
@@ -19,7 +19,7 @@ function dropDuplicates(jsonArray) {
     // object keys must not be repeated
     const uniqueByName = Object.values(
         jsonArray.reduce((item, obj) => {
-            item[obj.clientIP] = obj; 
+            item[obj.clientIP] = obj;
             return item;
         }, {})
     );
