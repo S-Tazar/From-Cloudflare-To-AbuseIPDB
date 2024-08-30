@@ -5,7 +5,7 @@ require("dotenv").config({path: '../.env'});
 
 const now = new Date();
 const threeHoursAgo = new Date(now);
-threeHoursAgo.setHours(now.getHours() - 24);
+threeHoursAgo.setHours(now.getHours() - 3);
 
 const payload = { "query":
   `query ListFirewallEvents($zoneTag: string, $filter: FirewallEventsAdaptiveFilter_InputObject) {
