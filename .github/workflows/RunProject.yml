@@ -6,6 +6,7 @@ name: RunProject
 on:
   schedule:
     - cron:  '1 */3 * * *'
+  workflow_dispatch:
 
 jobs:
   build:
