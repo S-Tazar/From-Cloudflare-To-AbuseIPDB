@@ -5,8 +5,9 @@ require("dotenv").config();
 // require("dotenv").config({path: '../.env'});
 
 const now = new Date();
-const threeHoursAgo = new Date(now);
-threeHoursAgo.setHours(now.getHours() - 3);
+const previousTiming = new Date(now);
+// 3.5 hours ago
+previousTiming.setHours(now.getHours() - 3, now.getMinutes() - 30);
 
 const payload = { "query":
   `query ListFirewallEvents($zoneTag: string, $filter: FirewallEventsAdaptiveFilter_InputObject) {
@@ -33,7 +34,7 @@ const payload = { "query":
     "variables": {
         "zoneTag": process.env.CF_ZONE_ID,
         "filter": {
-            "datetime_geq": threeHoursAgo, //"2024-08-28T00:47:24Z",
+            "datetime_geq": previousTiming, //"2024-08-28T00:47:24Z",
             "datetime_leq": now, //"2024-08-28T03:47:24Z",
             "AND":[
             {"action_neq": "allow"},
