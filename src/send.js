@@ -16,7 +16,7 @@ function sendAlertToAbuseIPDB(someArray) {
             headers:  {"Accept": "application/json", "Key": process.env.ABUSEIP_DB_KEY},
             body: formData,
         };
-        console.log(options);
+        // console.log(options);
 
         fetch("https://api.abuseipdb.com/api/v2/report", options)
             .then(response => response.json())

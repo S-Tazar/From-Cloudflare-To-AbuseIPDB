@@ -4,7 +4,7 @@ require("dotenv").config();
 // 替换敏感词
 function filterSensitive(someArray) {
     const sensitiveWords = JSON.parse(process.env.SENSITIVE);
-    console.log(sensitiveWords);
+    // console.log(sensitiveWords);
     someArray.forEach(item => {
         item.clientRequestPath = sensitiveWords.some(word => item.clientRequestPath.includes(word))
             ? `CloudFlare WAF REPORT: Disobey robots.txt. Suspicious web crawler.`
