@@ -6,7 +6,7 @@ function filterSensitive(someArray) {
     const sensitiveWords = JSON.parse(process.env.SENSITIVE);
     // console.log(sensitiveWords);
     someArray.forEach(item => {
-        item.clientRequestPath = sensitiveWords.some(word => item.clientRequestPath.includes(word))
+        item.clientRequestPath = sensitiveWords.some(word => item.clientRequestPath.includes(word)) || item.clientRequestPath === '/' && !item.clientRequestQuery
             ? `CloudFlare WAF REPORT: Disobey robots.txt. Suspicious web crawler.`
             : `CloudFlare WAF REPORT: ${item.clientRequestPath}`;
 
