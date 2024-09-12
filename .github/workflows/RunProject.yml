@@ -26,11 +26,12 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    
+
     - name: Run script
       run: npm start
-      env: 
+      env:
         CF_TOKEN: ${{ secrets.CF_TOKEN }}
         CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
         ABUSEIP_DB_KEY: ${{ secrets.ABUSEIP_DB_KEY }}
         SENSITIVE: ${{ secrets.SENSITIVE }}
+        WHITELIST_IP: ${{ secrets.WHITELIST_IP }}
