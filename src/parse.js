@@ -4,6 +4,7 @@ require("dotenv").config();
 // 替换敏感词
 function filterSensitive(someArray) {
     const sensitiveWords = JSON.parse(process.env.SENSITIVE);
+    const whitelistedIPs = JSON.parse(process.env.WHITELIST_IP);
     // console.log(sensitiveWords);
 
     someArray = someArray.filter(item => {
