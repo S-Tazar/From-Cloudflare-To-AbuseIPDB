@@ -5,13 +5,28 @@ require("dotenv").config();
 function filterSensitive(someArray) {
     const sensitiveWords = JSON.parse(process.env.SENSITIVE);
     // console.log(sensitiveWords);
-    someArray.forEach(item => {
-        item.clientRequestPath = sensitiveWords.some(word => item.clientRequestPath.includes(word)) || item.clientRequestPath === '/' && !item.clientRequestQuery
-            ? `CloudFlare WAF REPORT: Disobey robots.txt. Suspicious web crawler.`
-            : `CloudFlare WAF REPORT: ${item.clientRequestPath}`;
+
+    someArray = someArray.filter(item => {
+        const isWhitelistedIP = whitelistedIPs.includes(item.clientIP);
+
+        if (isWhitelistedIP) {
+            return false;
+        }
+
+        const isSensitivePath = sensitiveWords.some(word => item.clientRequestPath.includes(word)) ||
+                                (item.clientRequestPath === '/' && !item.clientRequestQuery);
+
+        if (isSensitivePath) {
+            item.clientRequestPath = `CloudFlare WAF REPORT: Disobey robots.txt. Suspicious web crawler.`;
+        } else {
+            item.clientRequestPath = `CloudFlare WAF REPORT: ${item.clientRequestPath}`;
+        }
 
         item.clientRequestPath = item.clientRequestQuery ? `${item.clientRequestPath}${item.clientRequestQuery}` : item.clientRequestPath;
+
+        return true;
     });
+
     return someArray;
 }
 
