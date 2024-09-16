@@ -9,11 +9,9 @@ function filterSensitive(someArray) {
 
     someArray = someArray.filter(item => {
         const isWhitelistedIP = whitelistedIPs.includes(item.clientIP);
-
         if (isWhitelistedIP) {
             return false;
         }
-
         const isSensitivePath = sensitiveWords.some(word => item.clientRequestPath.includes(word)) ||
                                 (item.clientRequestPath === '/' && !item.clientRequestQuery);
 
@@ -22,9 +20,7 @@ function filterSensitive(someArray) {
         } else {
             item.clientRequestPath = `CloudFlare WAF REPORT: ${item.clientRequestPath}`;
         }
-
-        item.clientRequestPath = item.clientRequestQuery ? `${item.clientRequestPath}${item.clientRequestQuery}` : item.clientRequestPath;
-
+        item.clientRequestPath = (item.clientRequestQuery && !isSensitivePath) ? `${item.clientRequestPath}${item.clientRequestQuery}` : item.clientRequestPath;
         return true;
     });
 
