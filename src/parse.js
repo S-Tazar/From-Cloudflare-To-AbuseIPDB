@@ -13,6 +13,9 @@ function filterSensitive(someArray) {
             return false;
         }
         const isSensitivePath = sensitiveWords.some(word => item.clientRequestPath.includes(word)) ||
+                          (item.clientRequestPath === '/' && !item.clientRequestQuery);
+        const isSensitiveQuery = sensitiveWords.some(word => item.clientRequestQuery.includes(word));
+
                                 (item.clientRequestPath === '/' && !item.clientRequestQuery);
 
         if (isSensitivePath) {
@@ -21,6 +24,12 @@ function filterSensitive(someArray) {
             item.clientRequestPath = `CloudFlare WAF REPORT: ${item.clientRequestPath}`;
         }
         item.clientRequestPath = (item.clientRequestQuery && !isSensitivePath) ? `${item.clientRequestPath}${item.clientRequestQuery}` : item.clientRequestPath;
+        if (!isSensitivePath && !isSensitiveQuery) {
+            item.clientRequestPath = `CloudFlare WAF REPORT: ${item.clientRequestPath}${item.clientRequestQuery || ''}`;
+        } else if (isSensitivePath || isSensitiveQuery) {
+            item.clientRequestPath = `CloudFlare WAF REPORT: Disobey robots.txt. ${isSensitiveQuery ? 'Suspicious web crawler with forbidden query string.' : 'Suspicious web crawler.'}`;
+        }
+    
         return true;
     });
 
