@@ -23,12 +23,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/S-Tazar/From-CloudFlare-To-AbuseIPDB.git"
+    "url": "git+https://github.com/S-Tazar/From-Cloudflare-To-AbuseIPDB.git"
   },
   "author": "Sophia.T",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/S-Tazar/From-CloudFlare-To-AbuseIPDB/issues"
+    "url": "https://github.com/S-Tazar/From-Cloudflare-To-AbuseIPDB/issues"
   },
-  "homepage": "https://github.com/S-Tazar/From-CloudFlare-To-AbuseIPDB#readme"
+  "homepage": "https://github.com/S-Tazar/From-Cloudflare-To-AbuseIPDB#readme"
 }
